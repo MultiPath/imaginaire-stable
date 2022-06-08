@@ -16,8 +16,8 @@ sudo apt-get update && sudo apt-get install -y --allow-downgrades --allow-change
         libx264-dev \
         imagemagick
 pip install cmake --upgrade
-conda install -y pytorch torchvision cudatoolkit=10.2 -c pytorch
-conda install -y -c anaconda pyqt
+# conda install -y pytorch torchvision cudatoolkit=10.2 -c pytorch
+# conda install -y -c anaconda pyqt
 pip install Pillow==6.1
 pip install tensorboard
 pip install scipy==1.3.3 --upgrade

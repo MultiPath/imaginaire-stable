@@ -352,7 +352,6 @@ class Trainer(BaseTrainer):
             for idx, data in enumerate(tqdm(loader)):
                 key = data['key']['images'][0][0]
                 filename = key.split('/')[-1]
-
                 # Create output dir for this sequence.
                 if idx == 0:
                     output_dir, seq_name = \
