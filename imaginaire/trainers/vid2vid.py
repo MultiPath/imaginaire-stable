@@ -398,20 +398,24 @@ class Trainer(BaseTrainer):
         save_fake_only = getattr(inference_args, 'save_fake_only', False)
         if save_fake_only:
             image_grid = tensor2im(self.net_G_output['fake_images'])[0]
+            vis_images = self.get_test_output_images(data)
+            full_grid  = np.hstack([np.vstack(im) for im in
+                                    vis_images if im is not None])
         else:
             vis_images = self.get_test_output_images(data)
             image_grid = np.hstack([np.vstack(im) for im in
                                     vis_images if im is not None])
+            full_grid = image_grid
         if 'img_name' in data:
-            save_name = data['img_name'].split('.')[0] + '.jpg'
+            save_name = data['img_name'].split('.')[0] + '.png'
         else:
-            save_name = '%04d.jpg' % self.t
+            save_name = '%04d.png' % self.t
         output_filename = os.path.join(output_dir, save_name)
         os.makedirs(output_dir, exist_ok=True)
         imageio.imwrite(output_filename, image_grid)
         self.t += 1
 
-        return image_grid
+        return full_grid
 
     def get_test_output_images(self, data):
         r"""Get the visualization output of test function.

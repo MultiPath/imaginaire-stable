@@ -27,6 +27,7 @@ def parse_args():
                         help='Dir for saving logs and models.')
     parser.add_argument('--seed', type=int, default=0,
                         help='Random seed.')
+    parser.add_argument('--testdir', type=str, default=None)
     parser.add_argument('--local_rank', type=int, default=0)
     parser.add_argument('--single_gpu', action='store_true')
     parser.add_argument('--num_workers', type=int)
@@ -42,6 +43,9 @@ def main():
     if not hasattr(cfg, 'inference_args'):
         cfg.inference_args = None
 
+    if args.testdir is not None:
+        cfg.test_data.test.roots = [args.testdir]
+    
     # If args.single_gpu is set to True,
     # we will disable distributed data parallel.
     if not args.single_gpu:
