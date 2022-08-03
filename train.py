@@ -22,6 +22,7 @@ def parse_args():
     parser.add_argument('--logdir', help='Dir for saving logs and models.')
     parser.add_argument('--checkpoint', default='', help='Checkpoint path.')
     parser.add_argument('--seed', type=int, default=0, help='Random seed.')
+    parser.add_argument('--traindir', type=str, default=None)
     parser.add_argument('--local_rank', type=int, default=0)
     parser.add_argument('--single_gpu', action='store_true')
     parser.add_argument('--num_workers', type=int)
@@ -34,6 +35,10 @@ def main():
     set_affinity(args.local_rank)
     set_random_seed(args.seed, by_rank=True)
     cfg = Config(args.config)
+
+    if args.traindir is not None:
+        cfg.data.train.roots = [args.traindir]
+        cfg.data.val.roots = [args.traindir]
 
     # If args.single_gpu is set to True,
     # we will disable distributed data parallel

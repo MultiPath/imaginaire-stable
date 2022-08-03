@@ -134,11 +134,13 @@ data:
         - images
     input_labels:
         - seg_maps      
-
+    paired: True
+    
     train:        
         roots:
             - ~      
         batch_size: 2
+        is_lmdb: False
         initial_sequence_length: 4
         max_sequence_length: 16        
         augmentations:
@@ -149,7 +151,8 @@ data:
     val:        
         roots:
             - ~
-        batch_size: 2      
+        batch_size: 2 
+        is_lmdb: False     
         augmentations:
             resize_h_w: 512, 512
             horizontal_flip: False
