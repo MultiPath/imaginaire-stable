@@ -273,7 +273,7 @@ class MultiPatchDiscriminator(nn.Module):
         num_layers = getattr(dis_cfg, 'num_layers', 3)
         activation_norm_type = getattr(dis_cfg, 'activation_norm_type', 'none')
         weight_norm_type = getattr(dis_cfg, 'weight_norm_type',
-                                   'spectral_norm')
+                                   'spectral')
         self.nets_discriminator = []
         for i in range(num_discriminators):
             net_discriminator = NLayerPatchDiscriminator(
